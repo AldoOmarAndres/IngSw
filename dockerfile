@@ -1,11 +1,13 @@
-FROM node:20
+FROM node:20-alpine
 
-WORKDIR ./
+WORKDIR /app
 
 COPY package.json .
+
 RUN npm install
+
 COPY . .
 
 EXPOSE 3000
 
-CMD [ "node", "index.jsx" ]
+CMD [ "npm", "run", "dev" ]
