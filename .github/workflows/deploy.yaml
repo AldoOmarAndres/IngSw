@@ -1,0 +1,28 @@
+name: Deploy a docker
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Login to DockerHub
+        uses: doker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push docker image
+        uses: docker/build-push-action@v4
+        with:
+          context: DockerFileFolder/
+          push: true
+          tags: aldoandres/deploy-demo:latest

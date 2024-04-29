@@ -1,5 +1,6 @@
 import styles from "./App.module.css";
 import { createSignal } from "solid-js";
+import {traerChiste} from './api'
 
 function App() {
   const [chiste, setChiste] = createSignal({
@@ -7,11 +8,8 @@ function App() {
   });
 
   const generarChiste = async () => {
-    await fetch("https://v2.jokeapi.dev/joke/Any")
-      .then((response) => response.json())
-      .then((data) => setChiste(data))
-      .catch((error) => error);
-      console.log(chiste())
+    setChiste(await traerChiste())
+    //console.log(chiste())
   };
 
   return (
