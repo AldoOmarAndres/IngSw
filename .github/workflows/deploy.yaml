@@ -1,32 +1,18 @@
-name: Deploy a docker
+name: Docker Image CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
+
   build:
-    name: Build
+
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: Login to DockerHub
-        uses: doker/login-action@v2
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: ${{ github.repository }}
-          tag_with_ref: true
-          tag_with_sha: true
-          tags: ${{ github.sha }}
-
-      - name: Build and push docker image
-        uses: docker/build-push-action@v4
-        with:
-          context: DockerFileFolder/
-          push: true
-          tags: aldoandres/deploy-demo:latest
+    - uses: actions/checkout@v4
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
