@@ -19,6 +19,10 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+          repository: ${{ github.repository }}
+          tag_with_ref: true
+          tag_with_sha: true
+          tags: ${{ github.sha }}
 
       - name: Build and push docker image
         uses: docker/build-push-action@v4
