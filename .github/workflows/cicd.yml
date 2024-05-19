@@ -1,0 +1,26 @@
+name: Prueba deploy
+
+on:
+  push:
+    branches: 
+      - main
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+      - name: Set up Node version
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      - name: Instalar dependencias y testear
+        run:
+          npm install
+          npm run build
+      - name: Deploy to azure
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: chistesApp
+          publish-profile: ${{ secrets.AZUREWEBAPPPUBLISHPROFILE }}
+          package: .
