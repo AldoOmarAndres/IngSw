@@ -24,5 +24,3 @@ jobs:
           app-name: chistesApp
           publish-profile: ${{ secrets.AZUREWEBAPPPUBLISHPROFILE }}
           package: .
-
-
