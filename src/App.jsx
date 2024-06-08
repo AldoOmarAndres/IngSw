@@ -4,7 +4,7 @@ import {traerChiste} from './api'
 
 function App() {
   const [chiste, setChiste] = createSignal({
-    joke: "Aun no se me ocurre ninguno",
+    joke: "Aun no se me ocurre ningún chiste...",
   });
 
   const generarChiste = async () => {
