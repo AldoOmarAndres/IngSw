@@ -4,7 +4,8 @@ export async function traerChiste() {
   );
   if (chiste.category == "Dark"){
     return {
-      joke: "Oops, un chiste de humor negro, mejor elegimos otro"
+      joke: "Oops, un chiste de humor negro, mejor elegimos otro",
+      error: false
     }
   }
   return chiste;
