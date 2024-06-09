@@ -2,10 +2,10 @@ name: Deploy web app to Azure Static Web Apps
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
     types: [opened, synchronize, reopened, closed]
-    branches: [ "main" ]
+    branches: ["main"]
 
 # Environment variables available to all jobs and steps in this workflow
 env:
@@ -13,6 +13,9 @@ env:
   API_LOCATION: "" # location of your api source code - optional
   APP_ARTIFACT_LOCATION: "/dist" # location of client code build output
   AZURE_STATIC_WEB_APPS_API_TOKEN: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }} # secret containing deployment token for your static web app
+  ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  ORGNAME: ${{ secrets.ORGNAME }}
 
 permissions:
   contents: read
@@ -28,16 +31,36 @@ jobs:
         uses: actions/checkout@v4
         with:
           submodules: true
-        
+
       - name: Use Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20.x'
+          node-version: "20.x"
       - run: npm install
       - run: npm run test --if-present
 
+  codethreat_scanner:
+    runs-on: ubuntu-latest
+    name: Codethreat Scan
+    steps:
+      - name: Check Out Source Code
+        uses: actions/checkout@v4
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+      - name: CodeThreat Scanner
+        uses: CodeThreat/codethreat-github-action@v1.022
+    
+        with:
+          FAILED_ARGS: |
+            - max_number_of_critical: 15
+            - max_number_of_high: 15
+            - condition: 'OR'
+            - automerge: true
+            - sync_scan: true
+            - policy_name: 'Code Quality - Best Practices'
+
   build_and_deploy_job:
-    needs: test
+    needs: [test, codethreat_scanner]
     permissions:
       contents: read # for actions/checkout to fetch code
       pull-requests: write # for Azure/static-web-apps-deploy to comment on PRs
@@ -61,4 +84,3 @@ jobs:
           app_location: ${{ env.APP_LOCATION }}
           api_location: ${{ env.API_LOCATION }}
           app_artifact_location: ${{ env.APP_ARTIFACT_LOCATION }}
-          
