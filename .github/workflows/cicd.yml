@@ -48,7 +48,7 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v4
       - name: CodeThreat Scanner
-        uses: CodeThreat/codethreat-github-action@v1.022
+        uses: CodeThreat/codethreat-scan-action@master
     
         with:
           FAILED_ARGS: |
