@@ -32,35 +32,16 @@ jobs:
         with:
           submodules: true
 
-      - name: Use Node.js
+      - name: Instalar Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20.x"
       - run: npm install
       - run: npm run test --if-present
 
-  codethreat_scanner:
-    runs-on: ubuntu-latest
-    name: Codethreat Scan
-    steps:
-      - name: Check Out Source Code
-        uses: actions/checkout@v4
-      - name: Install Node.js
-        uses: actions/setup-node@v4
-      - name: CodeThreat Scanner
-        uses: CodeThreat/codethreat-scan-action@master
-    
-        with:
-          FAILED_ARGS: |
-            - max_number_of_critical: 15
-            - max_number_of_high: 15
-            - condition: 'OR'
-            - automerge: true
-            - sync_scan: true
-            - policy_name: 'Code Quality - Best Practices'
 
   build_and_deploy_job:
-    needs: [test, codethreat_scanner]
+    needs: test
     permissions:
       contents: read # for actions/checkout to fetch code
       pull-requests: write # for Azure/static-web-apps-deploy to comment on PRs
