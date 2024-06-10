@@ -50,7 +50,7 @@ jobs:
         with:
           args: >
               -Dsonar.organization=AldoAndres
-              -Dsonar.projectKey=aldoandres
+              -Dsonar.projectKey=IngSw
 
   build_and_deploy_job:
     needs: [test, sonar_cloud]
