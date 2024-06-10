@@ -49,7 +49,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           args: >
-              -Dsonar.organaization=aldoandres
+              -Dsonar.organization=aldoandres
               -Dsonar.projectKey=IngSw
 
   build_and_deploy_job:
