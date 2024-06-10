@@ -41,7 +41,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          submodules: true
+          fetch-depth: 0
       - name: SonarCloud Code Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
@@ -49,8 +49,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           args: >
-              -Dsonar.organization=aldoandres
-              -Dsonar.projectKey=IngSw
+              -Dsonar.organization=AldoAndres
+              -Dsonar.projectKey=aldoandres
 
   build_and_deploy_job:
     needs: [test, sonar_cloud]
