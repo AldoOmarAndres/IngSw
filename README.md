@@ -1,8 +1,9 @@
+# Algunos Chistes
+Una aplicación simple que utiliza SolidJs, Vite, Jest y una api externa para atraer risas de los usuarios.<br>
+
+Es una prueba del poder de la automatización, utilizando GitHub Actions, Azure, Jira y SonarCloud para poder integrar cambios de manera automática y atendiendo la calidad del código.
+
 ## Usage
-
-Those templates dependencies are maintained via [pnpm](https://pnpm.io) via `pnpm up -Lri`.
-
-This is the reason you see a `pnpm-lock.yaml`. That being said, any package manager will work. This file can be safely be removed once you clone a template.
 
 ```bash
 $ npm install # or pnpm install or yarn install
@@ -26,9 +27,8 @@ The page will reload if you make edits.<br>
 Builds the app for production to the `dist` folder.<br>
 It correctly bundles Solid in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
 
 ## Deployment
 
-You can deploy the `dist` folder to any static host provider (netlify, surge, now, etc.)
+La aplicación se encuentra deployada en Azure Static Web Apps.<br>
+Se puede acceder a la misma mediante el siguiente link [TeCuentoUno](https://gray-stone-08c0f440f.5.azurestaticapps.net)
