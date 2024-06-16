@@ -3,32 +3,32 @@ Una aplicación simple que utiliza SolidJs, Vite, Jest y una api externa para at
 
 Es una prueba del poder de la automatización, utilizando GitHub Actions, Azure, Jira y SonarCloud para poder integrar cambios de manera automática y atendiendo la calidad del código.
 
-## Usage
+Para servir los chistes se consume la API de `https://v2.jokeapi.dev/`. 
+
+## Uso
 
 ```bash
 $ npm install # or pnpm install or yarn install
 ```
 
-### Learn more on the [Solid Website](https://solidjs.com) and come chat with us on our [Discord](https://discord.com/invite/solidjs)
+### Por si tienes interes en Solid: [Solid Website](https://solidjs.com)
 
-## Available Scripts
+## Scripts
 
-In the project directory, you can run:
+Se puede usar:
 
-### `npm run dev` or `npm start`
+### `npm run test`
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br>
+Ejecuta un test simple verificando si la API responde con o sin errores.
 
 ### `npm run build`
 
-Builds the app for production to the `dist` folder.<br>
-It correctly bundles Solid in production mode and optimizes the build for the best performance.
+Es importante ejecutar el build y que este se encuentre en la carpeta `dist` ya que es donde está indicado que debe buscar Azure para hacer el deploy. <br>
+En caso de querer cambiar, se debe actualizar la variable correspondiente del archivo `.github/workflow/cicd.yml`
 
 
 ## Deployment
 
 La aplicación se encuentra deployada en Azure Static Web Apps.<br>
 Se puede acceder a la misma mediante el siguiente link [TeCuentoUno](https://gray-stone-08c0f440f.5.azurestaticapps.net)
+(Actualmente está dado de baja)
